@@ -1,0 +1,31 @@
+#lang planet dyoo/simply-scheme:2
+;Exercise 1.31
+(define (product term a next b)
+  (if (> a b)
+      1
+      (* (term a) (product term (next a) next b))))
+
+(define (product-iter term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) (* result (term a)))))
+  (iter a 1))
+  
+(define (pi-approx n)
+  (define (pi-term a)
+    (/ (* 4 (square a)) (- (* 4 (square a)) 1)))
+  (* 2.0 (product-iter pi-term 1 inc n)))
+
+(define (identity x) x)
+
+(define (inc x) (+ x 1))
+
+(define (square x) (* x x))
+
+(define (factorial x)
+  (product-iter identity 1 inc x))
+
+(define (factorial-recursive x)
+  (product identity 1 inc x))
+

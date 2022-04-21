@@ -1,0 +1,26 @@
+#lang planet dyoo/simply-scheme:2
+;Exercise 1.8: Cube root algo
+(define (cbrt-iter guess x)
+   (if (better-guess? guess x)
+       guess
+       (cbrt-iter (improve guess x) x)))
+;Cube root improvement formula
+(define (improve guess x) ;FIXME
+  (/
+   (+ (/ x (square guess)) (* 2 guess))
+   3))
+(define (good-enough? guess x)
+  (< (abs (- (square guess) x)) 0.0001))
+(define (better-guess? guess x)
+  ;(< (abs (/ (- (improve guess x) guess) guess)) 0.001))
+  ; Solution below goes to limit of machine precision
+  (= (improve (improve guess x) x) guess))
+
+(define (cbrt x)
+  (cbrt-iter 1.1 x))
+(define (square x) (* x x))
+
+(define (error est corr)
+  (/ (abs (- est corr)) corr))
+
+(define (cube x) (* x x x))

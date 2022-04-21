@@ -1,0 +1,9 @@
+#lang planet dyoo/simply-scheme:2
+;Exercise 1.21
+(define (smallest-divisor n)
+  (define (div-iter a)
+    (cond ((> (square a) n) n)
+          ((= (remainder n a) 0) a)
+          (else (div-iter (+ a 1)))))
+  div-iter 2)
+(define (square x) (* x x))

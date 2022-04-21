@@ -1,0 +1,43 @@
+#lang sicp
+;Exercise 1.22
+(define (smallest-divisor n)
+  (define (div-iter a)
+    (cond ((> (square a) n) n)
+          ((= (remainder n a) 0) a)
+          (else (div-iter (+ a 1)))))
+  (div-iter 2))
+(define (square x) (* x x))
+
+(define (search-for-primes start)
+  (define (odd-start a)
+    (if (= (remainder a 2) 0)
+        (+ a 1)
+        a))
+  (define (get-prime a)
+  (if(= (smallest-divisor a) a)
+     a
+     (get-prime (+ a 2))))
+  (get-prime (odd-start start)))
+
+;TO DO: remember, we are trying to generate 3 prime #s after start
+;How can we output more than 1 value? TRY KEYWORD values
+  
+  
+
+
+         
+;(define (timed-prime-test n)
+;  (newline)
+;  (display n)
+;  (start-prime-test n (runtime)))
+;(define (start-prime-test n start-time)
+;  (if (prime? n)
+;     (report-prime (- (runtime) start-time))))
+;(define (report-prime elapsed-time)
+; (display " ***")
+;  (display elapsed-time))
+
+
+
+  
+  
